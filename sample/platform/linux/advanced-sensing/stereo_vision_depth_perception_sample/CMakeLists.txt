@@ -5,10 +5,10 @@ find_path(OPENCV_CONTRIB_IMG_PROC
         NAMES
         disparity_filter.hpp
         PATHS
-        /usr/include/opencv2/ximgproc
-        /usr/local/include/opencv2/ximgproc
-        /opt/local/include/opencv2/ximgproc
-        /sw/include/opencv2/ximgproc
+        /usr/include/opencv4/opencv2/ximgproc
+        /usr/local/include/opencv4/opencv2/ximgproc
+        /opt/local/include/opencv4/opencv2/ximgproc
+        /sw/include/opencv4/opencv2/ximgproc
         PATH_SUFFIXES
         opencv2/ximgproc
         )
@@ -17,10 +17,10 @@ find_path(OPENCV_VIZ
         NAMES
         viz3d.hpp
         PATHS
-        /usr/include/opencv2/viz
-        /usr/local/include/opencv2/viz
-        /opt/local/include/opencv2/viz
-        /sw/include/opencv2/viz
+        /usr/include/opencv4/opencv2/viz
+        /usr/local/include/opencv4/opencv2/viz
+        /opt/local/include/opencv4/opencv2/viz
+        /sw/include/opencv4/opencv2/viz
         PATH_SUFFIXES
         opencv2/viz
         )
@@ -56,6 +56,21 @@ else()
         message(STATUS "Found OpenCV ${OpenCV_VERSION} installed in the system, this sample requires 3.3.0+ for better experience")
         message(STATUS " - Includes: ${OpenCV_INCLUDE_DIRS}")
         add_definitions(-DOPEN_CV_INSTALLED)
+	set(OPEN_CV_3_3_0_INSTALLED 1)
+
+	if(NOT OPENCV_CONTRIB_IMG_PROC STREQUAL OPENCV_CONTRIB_IMG_PROC-NOTFOUND)
+	message(STATUS "Found ximgproc module in OpenCV, will use it to filter disparity map in depth perception sample")
+	add_definitions(-DUSE_OPEN_CV_CONTRIB)
+	else()
+	message(STATUS "Did not find ximgproc in OpenCV")
+	endif()
+
+	if(NOT OPENCV_VIZ STREQUAL OPENCV_VIZ-NOTFOUND)
+	message(STATUS "Found viz3d in OpenCV, will use it to visualize point cloud")
+	set(FOUND_OPENCV_VIZ TRUE)
+	else()
+	message(STATUS "Did not find viz3d in OpenCV")
+	endif()
     else()
         message(STATUS "Did not find OpenCV in the system, image data is inside RecvContainer as raw data")
     endif()
