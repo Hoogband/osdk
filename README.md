@@ -54,3 +54,11 @@ You can get support from DJI and the community with the following methods:
 - Post questions on [**Stackoverflow**](http://stackoverflow.com) using [**dji-sdk**](http://stackoverflow.com/questions/tagged/dji-sdk) tag
 
 # osdk-ros
+
+After changing code, update it:
+
+git add --all
+
+git commit -m "message"
+
+git push
