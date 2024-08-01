@@ -65,6 +65,8 @@ int main(int argc, char** argv)
     return 1;
   }
 
+  bool changeSourceResult = vehicle->advancedSensing->changeH264Source(static_cast<DJI::OSDK::LiveView::LiveViewCameraPosition>(0),static_cast<DJI::OSDK::LiveView::LiveViewCameraSource>(3));
+
   CameraRGBImage mainImg;
   const char winName[]="My Camera";
   char message1[100];
